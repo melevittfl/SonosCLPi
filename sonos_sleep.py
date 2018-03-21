@@ -7,7 +7,43 @@ import sys
 import errno
 import logging
 import logging.config
+import requests
+import json
 from config import *
+
+
+def map_fd_to_cl(fd_message):
+
+    seat_info = fd_message['seatInfo']
+
+    tz = pytz.UTC
+    transactionTimestamp = datetime.datetime.fromtimestamp(fd_message['timestamp'] / 1e3, tz).isoformat(timespec='milliseconds')
+
+    cl_data = [{'memberRefId': str(seat_info['userId']),
+                'entityRefId': 'dfs',
+                'action': 'game-entry',
+                'sourceValue': seat_info['stake'],
+                'transactionTimestamp': transactionTimestamp
+                }]
+
+    logging.info("CL message %s" % json.dumps(cl_data))
+
+    return cl_data
+
+
+def send_event_to_cl(cl_data):
+    url = "https://demo.competitionlabs.com/api/marktest1/events"
+
+    payload = json.dumps(cl_data)
+    logging.info(f"Sending to CL: {payload}")
+    headers = {
+        'x-api-key': CL_API_KEY,
+        'content-type': "application/json"
+    }
+
+    response = requests.request("POST", url, data=payload, headers=headers)
+
+    logging.info(f"{response.text}")
 
 
 def seconds_to_minutes_and_seconds(seconds):
