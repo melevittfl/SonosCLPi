@@ -58,7 +58,7 @@ def send_event_to_cl(cl_data):
 
     response = requests.request("POST", url, data=payload, headers=headers)
 
-    print(f"{response.text}")
+    print(f"Response Code: {response.status_code} Response Data: {response.text}")
 
 
 def main():
