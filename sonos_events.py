@@ -11,6 +11,8 @@ import logging.config
 import requests
 import json
 
+from sense_hat import SenseHat
+
 from config import *
 
 
@@ -83,6 +85,7 @@ def main():
             if "PLAYING" == event.transport_state:
                 print(f"Transport State: {event.transport_state}")
                 print(f"Title: {track_data.title}")
+                sense.show_message(track_data.title)
                 print(f"Track Length: {event.current_track_duration}")
                 print(f"Album: {track_data.album}")
                 print(f"Artist: {track_data.creator}")
