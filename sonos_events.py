@@ -52,7 +52,7 @@ def send_event_to_cl(cl_data):
     url = "https://demo.competitionlabs.com/api/marktest1/events"
 
     payload = json.dumps(cl_data)
-    logging.info(f"Sending to CL: {payload}")
+    logging.info("Sending to CL: ".format(payload))
     headers = {
         'x-api-key': CL_API_KEY,
         'content-type': "application/json"
@@ -60,7 +60,7 @@ def send_event_to_cl(cl_data):
 
     response = requests.request("POST", url, data=payload, headers=headers)
 
-    print(f"Response Code: {response.status_code} Response Data: {response.text}")
+    print("Response Code: {0} Response Data: {1}".format(response.status_code, response.text))
 
 
 def main():
@@ -79,23 +79,22 @@ def main():
             print("----------------")
             track_data = event.variables['current_track_meta_data']
 
-
-            print(f"Event Sequence number: {event.seq}")
-            print(f"Event Subscription id: {event.sid}")
+            print("Event Sequence number: {}".format(event.seq))
+            print("Event Subscription id: {}".format(event.seq))
             if "PLAYING" == event.transport_state:
-                print(f"Transport State: {event.transport_state}")
-                print(f"Title: {track_data.title}")
+                print("Transport State: {}".format(event.transport_state))
+                print("Title: {}".format(track_data.title))
                 sense.show_message(track_data.title)
-                print(f"Track Length: {event.current_track_duration}")
-                print(f"Album: {track_data.album}")
-                print(f"Artist: {track_data.creator}")
-                print(f"Track Number in Queue: {event.current_track}")
-                print(f"Number of Tracks in Queue: {event.number_of_tracks}")
-                print(f"Timestamp: {event.timestamp}")
-                cl_event = map_event_to_cl_event(event)
-                payload = json.dumps(cl_event)
-                print(f"Sending to CL: {payload}")
-                send_event_to_cl(cl_event)
+                # print(f"Track Length: {event.current_track_duration}")
+                # print(f"Album: {track_data.album}")
+                # print(f"Artist: {track_data.creator}")
+                # print(f"Track Number in Queue: {event.current_track}")
+                # print(f"Number of Tracks in Queue: {event.number_of_tracks}")
+                # print(f"Timestamp: {event.timestamp}")
+                # cl_event = map_event_to_cl_event(event)
+                # payload = json.dumps(cl_event)
+                # print(f"Sending to CL: {payload}")
+                # send_event_to_cl(cl_event)
 
 
 
