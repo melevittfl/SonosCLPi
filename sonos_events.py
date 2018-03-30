@@ -69,6 +69,7 @@ def main():
 
     logging.debug("Subscribing to play events")
     sub = device.avTransport.subscribe()
+    sense = SenseHat()
 
     while True:
         try:
