@@ -1,7 +1,7 @@
 from sense_hat import SenseHat
 
 sense = SenseHat()
-sense.Clear()
+sense.clear()
 
 # colours
 b = (0,0,0)  # Black
