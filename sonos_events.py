@@ -10,7 +10,7 @@ import logging
 import logging.config
 import requests
 import json
-
+import sys
 
 
 from config import *
@@ -21,12 +21,22 @@ from soco.events import event_listener
 
 time = "00:01:00"
 sum(x * int(t) for x, t in zip([3600, 60, 1], time.split(":")))
+
+
+def timespec_now():
+    if sys.version_info < (3,6,0):
+        timestamp = datetime.now(timezone.utc).isoformat(timespec='milliseconds')
+    else:
+        timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+
+    return timestamp
+
 def map_event_to_cl_event(event_data):
 
     track_data = event_data.variables['current_track_meta_data']
 
     tz = pytz.UTC
-    transactionTimestamp = datetime.now(timezone.utc).isoformat(timespec='milliseconds')
+    transactionTimestamp = timespec_now()
 
     cl_data = [{'memberRefId': "FrontRoom",
                 'entityRefId': track_data.title,
