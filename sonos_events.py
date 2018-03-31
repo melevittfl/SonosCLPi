@@ -11,7 +11,7 @@ import logging.config
 import requests
 import json
 
-from sense_hat import SenseHat
+
 
 from config import *
 
@@ -69,7 +69,6 @@ def main():
 
     logging.debug("Subscribing to play events")
     sub = device.avTransport.subscribe()
-    sense = SenseHat()
 
     while True:
         try:
@@ -85,17 +84,16 @@ def main():
             if "PLAYING" == event.transport_state:
                 print("Transport State: {}".format(event.transport_state))
                 print("Title: {}".format(track_data.title))
-                sense.show_message(track_data.title)
                 # print(f"Track Length: {event.current_track_duration}")
                 # print(f"Album: {track_data.album}")
                 # print(f"Artist: {track_data.creator}")
                 # print(f"Track Number in Queue: {event.current_track}")
                 # print(f"Number of Tracks in Queue: {event.number_of_tracks}")
                 # print(f"Timestamp: {event.timestamp}")
-                # cl_event = map_event_to_cl_event(event)
-                # payload = json.dumps(cl_event)
+                cl_event = map_event_to_cl_event(event)
+                payload = json.dumps(cl_event)
                 # print(f"Sending to CL: {payload}")
-                # send_event_to_cl(cl_event)
+                send_event_to_cl(cl_event)
 
 
 
