@@ -24,7 +24,7 @@ sum(x * int(t) for x, t in zip([3600, 60, 1], time.split(":")))
 
 
 def timespec_now():
-    if sys.version_info < (3,6,0):
+    if sys.version_info > (3,6,0):
         timestamp = datetime.now(timezone.utc).isoformat(timespec='milliseconds')
     else:
         timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
