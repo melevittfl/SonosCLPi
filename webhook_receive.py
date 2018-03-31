@@ -59,4 +59,5 @@ def webhook_handler():
 
 
 if __name__ == '__main__':
+    sense.clear()
     application.run(host='0.0.0.0', port=8888, debug=True)
