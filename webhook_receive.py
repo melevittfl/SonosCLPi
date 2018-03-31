@@ -2,6 +2,8 @@ from flask import Flask
 from flask import request
 import gzip, io
 import json
+import sense_hat
+
 
 
 application = Flask(__name__)
