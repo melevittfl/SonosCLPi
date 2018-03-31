@@ -27,7 +27,7 @@ def timespec_now():
     if sys.version_info > (3,6,0):
         timestamp = datetime.now(timezone.utc).isoformat(timespec='milliseconds')
     else:
-        timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3]
+        timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%f%z')
 
     return timestamp
 
