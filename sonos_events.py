@@ -59,12 +59,12 @@ def map_event_to_cl_event(event_data):
 
 
 def send_event_to_cl(cl_data):
-    url = "https://demo.competitionlabs.com/api/marktest1/events"
+    url = "https://app.competitionlabs.com/api/marktest1/events"
 
     payload = json.dumps(cl_data)
     logging.info("Sending to CL: ".format(payload))
     headers = {
-        'x-api-key': CL_API_KEY,
+        'X-API-KEY': CL_API_KEY,
         'content-type': "application/json"
     }
 

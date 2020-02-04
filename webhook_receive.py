@@ -9,8 +9,8 @@ from sense_hat import SenseHat
 
 application = Flask(__name__)
 
-def action_triggered:
-    sense = SenseHat()
+def action_triggered():
+
     sense.clear()
 
     # colours
@@ -59,5 +59,6 @@ def webhook_handler():
 
 
 if __name__ == '__main__':
+    sense = SenseHat()
     sense.clear()
     application.run(host='0.0.0.0', port=8888, debug=True)
