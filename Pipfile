@@ -9,7 +9,7 @@ verify_ssl = true
 certifi = "*"
 chardet = "==3.0.4"
 idna = "==2.6"
-requests = "==2.18.4"
+requests = "==2.20.0"
 soco = "==0.14"
 urllib3 = "==1.22"
 xmltodict = "==0.11.0"
